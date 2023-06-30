@@ -3,6 +3,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule, TypeOrmModuleOptions} from "@nestjs/typeorm";
 import { UserModule } from './user/user.module';
+import { SocieteController } from './societe/societe.controller';
+import { SocieteService } from './societe/societe.service';
+import { SocieteModule } from './societe/societe.module';
 
 const ormOptions :TypeOrmModuleOptions= {
   type : 'mysql',
@@ -20,7 +23,8 @@ const ormOptions :TypeOrmModuleOptions= {
       TypeOrmModule.forRoot(
 ormOptions
       ),
-      UserModule
+      UserModule,
+      SocieteModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,5 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
-import {name} from "ts-jest/dist/transformers/hoist-jest";
+
 
 
 @Entity(  "user")

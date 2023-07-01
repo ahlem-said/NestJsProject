@@ -1,19 +1,16 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe} from '@nestjs/common';
 import {UserService} from "../User/user.service";
 import {SocieteService} from "./societe.service";
+import {CreateSocieteDto} from "../DTO/SocieteDto.dto";
 
 @Controller('societe')
 export class SocieteController {
     constructor(private societeService : SocieteService) {
     }
     @Post()
-    createNewSociete(@Body() data):void  {
-        const  {
-            Nom, adresse, active, region ,DataBaseName,DomainID,EncryptionKey,pays,
-            MailFiscal,website
-        } =data;
-        this.societeService.createNewSociete(Nom, adresse, active, region ,DataBaseName,DomainID,EncryptionKey,pays,
-            MailFiscal,website);
+    createNewSociete(@Body(ValidationPipe) data:CreateSocieteDto ) {
+
+        this.societeService.createNewSociete(data);
 
 
     }
@@ -21,5 +18,14 @@ export class SocieteController {
     getAllUsers() {
 
         return this.societeService.getAllSocietes();
+    }
+    @Put(':id')
+    updateUser(@Param('id') id: string, @Body() updateUserDto: CreateSocieteDto) {
+        return this.societeService.updateSociete(id, updateUserDto);
+    }
+
+    @Delete(':id')
+    deleteUser(@Param('id') id: string) {
+        return this.societeService.deleteUser(id);
     }
 }

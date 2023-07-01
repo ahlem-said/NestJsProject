@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {UserEntity} from "./User.entity";
 
 
 @Entity(  "societe")
@@ -23,8 +24,10 @@ export class SocieteEntity{
     EncryptionKey : number;
     @Column()
     DataBaseName : string ;
-    @Column()
+    @Column({ default: false })
     active : boolean;
+    @OneToMany(() => UserEntity, user => user.societe)
+    users: UserEntity[];
 
 
 

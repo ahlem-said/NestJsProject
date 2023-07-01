@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {SocieteEntity} from "./Societe.entity";
 
 
 
@@ -10,10 +11,13 @@ export class UserEntity{
    username : string;
    @Column()
    password : string;
-   @Column()
-   active : boolean ;
+    @Column({ default: false })
+
+    active : boolean ;
    @Column()
    role : string;
 
+    @ManyToOne(() => SocieteEntity, societe => societe.users)
+    societe: SocieteEntity;
 
 }
